@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-// const { validateRegister  , validateLogin} = require("../validations/user.validation")
+const { validateOnboard} = require("../validations/investor.validation")
 
 //----------task------------------------------------------------------------------
-// const taskController = require('../controllers/order/task.controller');
-// router.post('/task/create', validateTask('createTask'), taskController.createTask);
+const investorController = require('../controllers/investor.controller');
+router.post('/onboard', validateOnboard('onboard'), investorController.onboard);
    
 
 module.exports = router;
