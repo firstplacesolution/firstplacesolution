@@ -1,7 +1,19 @@
 const express = require('express');
 const router = express.Router();
 
-const paymentRoute = require('../v1/routes/payment.route');
-router.use('/payment', paymentRoute);
+require("../v1/config/mongodb")
+
+
+const userRoute = require('../v1/routes/user.route');
+const investorRoute = require('../v1/routes/investor.route');
+const kycRoute = require('../v1/routes/kyc.route');
+const transactionRoute = require('../v1/routes/transaction.route');
+const walletRoute = require('../v1/routes/wallet.route');
+
+router.use('/user', userRoute);
+router.use('/investor', investorRoute);
+router.use('/kyc', kycRoute);
+router.use('/transaction', transactionRoute);
+router.use('/wallet', walletRoute);
 
 module.exports = router;
