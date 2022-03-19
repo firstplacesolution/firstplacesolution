@@ -1,20 +1,28 @@
-=======================================================================================================
-                                            APIS
-=======================================================================================================
-USER
-------
-#######################################################################################################
-1. Register User :
-------------------------
-Method : POST 
-Content-type  : raw/json
-Params : 
-{
+# First Place Solution
+
+
+Document Contains following
+- API Description
+
+
+## API Description
+
+## User
+Registration API
+
+| Path URL | v1/user/register |
+| ------ | ------ |
+| Method | POST |
+| Content/Type | Application/Json |
+```sh
+ # Request Params :
+ {
     "token" : "dummy",
     "phone" : "9575513319"
-}
-
-Success Response : 
+} 
+```
+```sh
+# Success Respone :
 {
     "status": true,
     "subCode": 200,
@@ -32,4 +40,5 @@ Success Response :
         }
     }
 }
-#######################################################################################################
+```
+
