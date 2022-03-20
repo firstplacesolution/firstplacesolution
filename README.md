@@ -11,7 +11,9 @@ Document Contains following
 
 
 
-Registration API
+### Registration API
+
+## Register User
 
 | Path URL | v1/user/register |
 | ------ | ------ |
@@ -19,7 +21,7 @@ Registration API
 | Content/Type | Application/Json |
 
 ```sh
- # Request Params :
+ # Request Body Params :
  {
     "token" : "dummy",
     "phone" : "9575513319"
@@ -54,7 +56,9 @@ Registration API
 
 
 
-Onboard API
+### Onboard API
+
+## Onboard Investor
 
 | Path URL | v1/investor/onbaord |
 | ------ | ------ |
@@ -62,7 +66,7 @@ Onboard API
 | Content/Type | Application/Json |
 
 ```sh
- # Request Params :
+ # Request Body Params :
  {
     "user_id" : "623645b2f4cacb5123b7f36a",
     "full_name" : "Ashutosh Patidar",
@@ -90,6 +94,46 @@ Onboard API
         "city": "Indore",
         "referral_code": "",
         "_id": "6236468f025467611e0d8795",
+        "createdAt": "2022-03-19T21:09:35.837Z",
+        "updatedAt": "2022-03-19T21:09:35.837Z",
+        "__v": 0
+    }
+}
+```
+
+
+
+## Get Investor Onboard Details
+
+| Path URL | v1/investor/getOnboardDetails/ |
+| ------ | ------ |
+| Method | GET |
+| Content/Type | Application/Json |
+
+```sh
+ # Request Query Params :
+ {
+    "user_id" : "623645b2f4cacb5123b7f36a",
+   
+}
+```
+
+```sh
+# Success Respone :
+{
+    "status": true,
+    "subCode": 200,
+    "message": "Onboard Details",
+    "error": "",
+    "items": {
+        "_id": "6236468f025467611e0d8795",
+        "user_id": "623645b2f4cacb5123b7f36a",
+        "full_name": "Ashutosh Patidar",
+        "profile": "",
+        "email": "ashu@gmail.com",
+        "state": "MadhyaPradesh",
+        "city": "Indore",
+        "referral_code": "",
         "createdAt": "2022-03-19T21:09:35.837Z",
         "updatedAt": "2022-03-19T21:09:35.837Z",
         "__v": 0

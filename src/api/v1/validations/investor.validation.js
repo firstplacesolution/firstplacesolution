@@ -12,6 +12,11 @@ exports.validateOnboard = (method) => {
         body('city', 'City is Required').not().isEmpty().trim().escape()
       ]
     }
+    case 'onboardDetails': {
+      return [
+        param('user_id', 'User Id is Required').not().isEmpty().trim().escape()
+      ]
+    }
   }
 }
 

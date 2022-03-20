@@ -1,7 +1,7 @@
 const { success, unknownError, serverValidation, badRequest } = require('../helpers/response.helper');
 const { validationResult } = require('express-validator');
 const investorModel = require("../models/investor.model");
-const { checkInvestorByUserId } = require("../helpers/investor.helper")
+const { checkInvestorByUserId , getInvestorDetailsByUserId } = require("../helpers/investor.helper")
 
 
 module.exports = {
@@ -23,9 +23,25 @@ module.exports = {
                 }
             }
         } catch (error) {
-            console.log(error);
             unknownError(res, error);
         }
     },
 
+    getOnboardDetails : async (req,res) => {
+        try{
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                serverValidation(res, { errorName: "serverValidation", errors: errors.array() })
+            } else {
+                const investorDetails = await getInvestorDetailsByUserId(req.params.user_id);
+                if(investorDetails == "notFound"){
+                    badRequest(res , "Onboard Details not Found");
+                }else{
+                    success(res , "Onboard Details" , investorDetails)
+                }                
+            }
+        }catch(error){
+            unknownError(res, error);
+        }
+    }
 };
