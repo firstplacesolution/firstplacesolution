@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-// const { validateRegister  , validateLogin} = require("../validations/user.validation")
+const { validateKyc} = require("../validations/kyc.validation")
 
 //----------task------------------------------------------------------------------
-// const taskController = require('../controllers/order/task.controller');
-// router.post('/task/create', validateTask('createTask'), taskController.createTask);
+const kycController = require('../controllers/kyc.controller');
+router.post('/apply', validateKyc('submitKyc'), kycController.submitKyc);
    
 
 module.exports = router;

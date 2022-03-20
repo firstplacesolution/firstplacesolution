@@ -67,7 +67,7 @@ Document Contains following
 
 ```sh
  # Request Body Params :
- {
+{
     "user_id" : "623645b2f4cacb5123b7f36a",
     "full_name" : "Ashutosh Patidar",
     "email" : "ashu@gmail.com",
@@ -112,9 +112,8 @@ Document Contains following
 
 ```sh
  # Request Query Params :
- {
+{
     "user_id" : "623645b2f4cacb5123b7f36a",
-   
 }
 ```
 
@@ -140,4 +139,68 @@ Document Contains following
     }
 }
 ```
+
+
+
+
+### KYC API
+
+## Apply for KYC
+
+| Path URL | v1/kyc/apply |
+| ------ | ------ |
+| Method | POST |
+| Content/Type | Application/Json |
+
+```sh
+ # Request Body Params :
+{
+    "investor_id" : "623706e32f617e0fed3d6da7",
+    "dob": "20-02-1998",
+    "gender" : "Male",
+    "occupation" : "Salesman",
+    "annual_income" : "500000",
+    "address" : "420 address",
+    "postal_code" : "125478",
+    "aadhaar_number" : "123223343234",
+    "pan_number" : "DFRGA6584D",
+    "aadhaar_front_image" : "c",
+    "aadhaar_back_image" : "c",
+    "pan_front_image" : "c",
+    "selfie" : "selfie"
+}
+```
+
+```sh
+# Success Respone :
+{
+    "status": true,
+    "subCode": 200,
+    "message": "Investor KYC",
+    "error": "",
+    "items": {
+        "investor_id": "623706e32f617e0fed3d6da7",
+        "dob": "20-02-1998",
+        "gender": "Male",
+        "occupation": "Salesman",
+        "annual_income": 500000,
+        "address": "420 address",
+        "postal_code": "125478",
+        "aadhaar_number": "123223343234",
+        "pan_number": "DFRGA6584D",
+        "aadhaar_front_image": "c",
+        "aadhaar_back_image": "c",
+        "pan_front_image": "c",
+        "selfie": "selfie",
+        "status": "Pending",
+        "_id": "623721645a2b25a687ff1c5f",
+        "createdAt": "2022-03-20T12:43:16.694Z",
+        "updatedAt": "2022-03-20T12:43:16.694Z",
+        "__v": 0
+    }
+}
+```
+
+
+
 

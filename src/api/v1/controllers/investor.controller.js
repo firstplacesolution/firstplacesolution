@@ -1,6 +1,7 @@
 const { success, unknownError, serverValidation, badRequest } = require('../helpers/response.helper');
 const { validationResult } = require('express-validator');
 const investorModel = require("../models/investor.model");
+const walletModel = require("../models/wallet.model");
 const { checkInvestorByUserId , getInvestorDetailsByUserId } = require("../helpers/investor.helper")
 
 
@@ -17,6 +18,8 @@ module.exports = {
                 if (!investorDetails) {
                     const investorData = new investorModel(req.body);
                     investorDetails = await investorData.save();
+                    const walletData = new walletModel({investor_id : investorData._id})
+                    await walletData.save();
                     success(res, 'User Onboard', investorDetails);
                 } else {
                     badRequest(res, "User Already Registered");

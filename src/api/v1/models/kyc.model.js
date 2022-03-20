@@ -14,7 +14,8 @@ const KYCSchema = new Schema({
     aadhaar_front_image: { type: String, required: [true, 'Aadhaar front image is Required'] },
     aadhaar_back_image: { type: String, required: [true, 'Aadhaar back image is Required'] },
     pan_front_image: { type: String, required: [true, 'PAN front image is Required'] },
-    selfie: { type: String, required: [true, 'Selfie is Required'] }
+    selfie: { type: String, required: [true, 'Selfie is Required'] },
+    status: { type: String, enum: ['Pending', 'Approved', 'Rehected'], default: 'Pending' },
 }, { timestamps: true }
 );
 
