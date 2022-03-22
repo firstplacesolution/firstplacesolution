@@ -145,6 +145,8 @@ Document Contains following
 
 ### KYC API
 
+
+
 ## Apply for KYC
 
 | Path URL | v1/kyc/apply |
@@ -204,3 +206,95 @@ Document Contains following
 
 
 
+
+
+
+
+## Change KYC Status
+
+| Path URL | v1/kyc/changeStatus |
+| ------ | ------ |
+| Method | POST |
+| Content/Type | Application/Json |
+
+```sh
+ # Request Body Params :
+{
+    "status" : "Approved" , //Rejected , Pending
+    "investor_id" : "623706e32f617e0fed3d6da7"
+}
+```
+
+```sh
+# Success Respone :
+{
+    "status": true,
+    "subCode": 200,
+    "message": "Status Updated Successfully",
+    "error": ""
+}
+```
+
+
+
+
+
+### Wallet API
+
+
+
+## Add Wallet Balance
+
+| Path URL | v1/wallet/addBalance/ |
+| ------ | ------ |
+| Method | POST |
+| Content/Type | Application/Json |
+
+```sh
+ # Request Query Params :
+{
+    "investor_id": "623706e32f617e0fed3d6da7",
+    "amount" : 100
+}
+```
+
+```sh
+# Success Respone :
+{
+    "status": true,
+    "subCode": 200,
+    "message": "Balance Updated Successfully",
+    "error": ""
+}
+```
+
+
+
+## Get Wallet Balance
+
+| Path URL | v1/wallet/getBalance/ |
+| ------ | ------ |
+| Method | GET |
+| Content/Type | Application/Json |
+
+```sh
+ # Request Query Params :
+{
+    "investor_id" : "623706e32f617e0fed3d6da7"
+}
+```
+
+```sh
+# Success Respone :
+{
+    "status": true,
+    "subCode": 200,
+    "message": "Investor Wallet",
+    "error": "",
+    "items": {
+        "_id": "623706e32f617e0fed3d6da9",
+        "base_wallet": 0,
+        "reward_wallet": 0
+    }
+}
+```

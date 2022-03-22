@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
-// const { validateRegister  , validateLogin} = require("../validations/user.validation")
+const { validateWallet } = require("../validations/wallet.validation")
 
 //----------task------------------------------------------------------------------
-// const taskController = require('../controllers/order/task.controller');
-// router.post('/task/create', validateTask('createTask'), taskController.createTask);
+const walletController = require('../controllers/wallet.controller');
+router.get('/getBalance/:investor_id', validateWallet('getBalance'), walletController.getWalletBalance);
+router.post('/addBalance', validateWallet('updateWalletBalance'), walletController.updateWalletBalance);
    
 
-module.exports = router; 
+module.exports = router;

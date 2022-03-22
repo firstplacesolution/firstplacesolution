@@ -49,5 +49,24 @@ module.exports = {
         } catch (error) {
             unknownError(res, error);
         }
+    },
+
+    changeKycStatus : async (req ,res) =>{
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                serverValidation(res, { errorName: "serverValidation", errors: errors.array() })
+            } else {
+                const {investor_id , status} = req.body;
+                const kycStatusUpdate = await kycModel.findOneAndUpdate({investor_id}, {status});
+                if(kycStatusUpdate){
+                    success(res, 'Status Updated Successfully');
+                }else{
+                    badRequest(res , 'Invalid Details')
+                }                
+            }
+        } catch (error) {
+            unknownError(res, error);
+        }
     }
 };
