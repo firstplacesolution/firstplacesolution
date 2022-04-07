@@ -2,7 +2,8 @@ const {getInvestorWalletByInvestorId} = require('../helpers/wallet.helper');
 const {getPortfolioDetailsByInvestorId} = require('../helpers/portfolio.helper');
 const {getALLInvestorID} = require('../helpers/investor.helper');
 const walletModel = require("../models/wallet.model");
-
+const date = new Date();
+let year = date.getFullYear()
 async function investorID() {
     let list=[];
     let value = await  getALLInvestorID()
@@ -17,13 +18,53 @@ async function updateReward(investerId) {
     let money=await getInvestorWalletByInvestorId (investerId);
     let amount = 0
     portfolioList.forEach(element => {
-        amount += element.return
+        if (((year % 4 == 0) && (year % 100!= 0)) || (year %400 == 0)) {
+            amount += element.amount*element.rate/100/366
+        }else{amount += element.amount*element.rate/100/365}
     });
 
     // console.table("==========="+typeof(money.invested_amount))
     let daily_reward = parseFloat(amount)+parseFloat(money.reward_wallet);
     const walletBalanceUpdate = await walletModel.findOneAndUpdate({"investor_id":investerId }, { "reward_wallet": daily_reward});
 }
+
+// function monthCheck(month) {
+//     const date = new Date()
+// const month = date.getMonth()
+
+// switch (month) {
+//     case 0:
+//     case 2:
+//     case 4:
+//     case 6:
+//     case 7:
+//     case 9:
+//     case 11:{
+//         a = 5
+//         break;
+//     }
+//     case 1:{
+//         if (((year % 4 == 0) && (year % 100!= 0)) || (year%400 == 0)) {
+//             a = 6
+//         }else{
+//             a = 7
+//         }
+//         break;
+//     }
+//     case 3:
+//     case 5:
+//     case 8:
+//     case 10:{
+//         a = 7
+//         break;
+//     }
+//     default:
+//         break;
+// }
+// console.log(a)
+
+    
+// }
 
 async function rewardDistribution() {
     let list = await investorID();

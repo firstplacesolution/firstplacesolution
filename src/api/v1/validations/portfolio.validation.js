@@ -10,7 +10,12 @@ exports.validatePortfolio = (method) => {
     }
     case 'getAll': {
       return [
-        param('investor_id', 'Invalid User ID').not().isEmpty().trim().escape().isLength({min:24,max:24}),
+        param('investor_id', 'Invalid Investor ID').not().isEmpty().trim().escape().isLength({min:24,max:24}),
+      ]
+    }
+    case 'delete': {
+      return [
+        param('portfolio_id', 'Invalid User ID').not().isEmpty().trim().escape().isLength({min:24,max:24}),
       ]
     }
   }

@@ -13,6 +13,10 @@ const { where } = require('../models/wallet.model');
 
 
 /*----------------------------------------functions-------------------------------------------------------*/
+const date = new Date()
+let month = date.getMonth()
+let year = 
+console.log(month)
 module.exports = {
 
     portfolio: async(req,res) =>{
@@ -24,11 +28,12 @@ module.exports = {
                 let { investor_id,amount,rate,lockin } = req.body;
                 // const rate = process.env.PORTFOLIO_RATE
                 let redirectTo= "onboard";
-                let reward = amount*rate/100/12/30
-                const data = {investor_id:investor_id,amount:amount,rate:rate,lockin:lockin,return:reward};
+                
+                // let reward = amount*rate/100
+                const data = {investor_id:investor_id,amount:amount,rate:rate,lockin:lockin};
                 let money = await getInvestorWalletByInvestorId(investor_id)
                 if (money.base_wallet<amount) {
-                    res.send('add more money')
+                    res.send({status:false,subcode:403,message:'add more money'})
                 }else{
                     let invested_amount = parseFloat(money.invested_amount) + parseInt(amount)
                     let newBaseWalletBalance = parseInt(money.base_wallet) - parseInt(amount);
@@ -62,17 +67,18 @@ module.exports = {
             unknownError(res, error);
         }
     },
-    AllPortfolio: async(req,res) =>{
+    removePortfolio: async(req,res) =>{
         try {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
                 serverValidation(res, { errorName: "serverValidation", errors: errors.array() })
             } else {
-                    const data = await getAllPortfolioDetails()
-                    success(res, 'Portfolios',{data:data});
+                    const data = await portfolioModel.findOneAndRemove({_id:req.params.portfolio_id})
+                    success(res, 'Portfolios deleted',{data:data});
                 }        
         
         } catch (error) {
+            console.log(error)
             unknownError(res, error);
         }
     }
