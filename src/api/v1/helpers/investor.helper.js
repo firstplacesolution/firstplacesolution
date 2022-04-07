@@ -20,9 +20,30 @@ async function getInvestorDetailsByInvestorId(investor_id) {
     return investorDetails ? investorDetails : "notFound";
 }
 
+ async function getALLInvestorID() {
+    return new Promise((resolve, reject)=>{
+        // Use connect method to connect to the Server
+        investorModel.find( (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+    // let investorDetails = [];
+    //  investorModel.investorModel().then((value)=>{
+    //      investorDetails=value
+    //  }).catch(err=>{
+    //      throw err;
+    //  })
+    // return investorDetails ? investorDetails :[];
+}
+
 module.exports = {
     checkInvestorByUserId,
     checkInvestorByInvestorId,
     getInvestorDetailsByUserId,
-    getInvestorDetailsByInvestorId
+    getInvestorDetailsByInvestorId,
+    getALLInvestorID
 }

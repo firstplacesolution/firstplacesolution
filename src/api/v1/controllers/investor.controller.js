@@ -26,6 +26,7 @@ module.exports = {
                 }
             }
         } catch (error) {
+            console.log("hi"+error)
             unknownError(res, error);
         }
     },

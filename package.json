@@ -23,8 +23,11 @@
     "express": "^4.17.3",
     "express-validator": "^6.14.0",
     "firebase": "^9.6.1",
-    "mongoose": "^6.1.0",
+    "mongoose": "^6.2.9",
     "morgan": "^1.10.0",
-    "path": "^0.12.7"
+    "node-cron": "^3.0.0",
+    "nodemon": "^2.0.15",
+    "path": "^0.12.7",
+    "pm2": "^5.2.0"
   }
 }

@@ -2,6 +2,8 @@ const { success, unknownError, serverValidation, badRequest } = require('../help
 const { validationResult } = require('express-validator');
 const walletModel = require("../models/wallet.model");
 const { getInvestorWalletByInvestorId } = require("../helpers/wallet.helper");
+const {getPortfolioDetailsByInvestorId} = require('../helpers/portfolio.helper')
+const {getALLInvestorID} = require('../helpers/investor.helper')
 
 
 module.exports = {
@@ -47,7 +49,10 @@ module.exports = {
 
             }
         } catch (error) {
+            console.log(error)
             unknownError(res, error);
         }
-    }
-};
+    },
+
+        }
+            

@@ -1,6 +1,7 @@
 const { success, unknownError, serverValidation, badRequest } = require('../helpers/response.helper');
 const { validationResult } = require('express-validator');
 const kycModel = require("../models/kyc.model");
+const walletModel = require("../models/kyc.model");
 const { checkInvestorByInvestorId } = require("../helpers/investor.helper");
 const { checkKycByInvestorId } = require("../helpers/kyc.helper");
 
