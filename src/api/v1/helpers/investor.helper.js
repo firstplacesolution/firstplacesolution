@@ -31,13 +31,6 @@ async function getInvestorDetailsByInvestorId(investor_id) {
             }
         });
     });
-    // let investorDetails = [];
-    //  investorModel.investorModel().then((value)=>{
-    //      investorDetails=value
-    //  }).catch(err=>{
-    //      throw err;
-    //  })
-    // return investorDetails ? investorDetails :[];
 }
 
 module.exports = {

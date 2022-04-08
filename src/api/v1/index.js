@@ -2,18 +2,12 @@ const express = require('express');
 const router = express.Router();
 const nodeCron = require("node-cron");
 const {rewardDistribution} =require('./helpers/reward.helpers');
-// investorID();
-// let a = list
-// console.log(a)
-// function nikit() {
-    
-// }
+
+
 const db=require("../v1/config/mongodb");
 
-// let a = investorID().then((result)=>{
-//     console.log(result);
-// })
 
+//Cron job
 nodeCron.schedule("1 * * * * *",rewardDistribution);
 
 

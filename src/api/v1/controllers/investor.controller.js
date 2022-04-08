@@ -1,9 +1,13 @@
-const { success, unknownError, serverValidation, badRequest } = require('../helpers/response.helper');
-const { validationResult } = require('express-validator');
+/*----------------------------------------models-------------------------------------------------------*/
 const investorModel = require("../models/investor.model");
 const walletModel = require("../models/wallet.model");
+/*----------------------------------------helpers-------------------------------------------------------*/
+const { success, unknownError, serverValidation, badRequest } = require('../helpers/response.helper');
 const { checkInvestorByUserId , getInvestorDetailsByUserId } = require("../helpers/investor.helper")
+/*----------------------------------------validator-------------------------------------------------------*/
+const { validationResult } = require('express-validator');
 
+/*----------------------------------------functions-------------------------------------------------------*/
 
 module.exports = {
 
@@ -26,7 +30,6 @@ module.exports = {
                 }
             }
         } catch (error) {
-            console.log("hi"+error)
             unknownError(res, error);
         }
     },

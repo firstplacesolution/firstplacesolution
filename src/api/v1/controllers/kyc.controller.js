@@ -1,10 +1,13 @@
-const { success, unknownError, serverValidation, badRequest } = require('../helpers/response.helper');
-const { validationResult } = require('express-validator');
+/*----------------------------------------models-------------------------------------------------------*/
 const kycModel = require("../models/kyc.model");
-const walletModel = require("../models/kyc.model");
+/*----------------------------------------helpers-------------------------------------------------------*/
+const { success, unknownError, serverValidation, badRequest } = require('../helpers/response.helper');
 const { checkInvestorByInvestorId } = require("../helpers/investor.helper");
 const { checkKycByInvestorId } = require("../helpers/kyc.helper");
+/*----------------------------------------validator-------------------------------------------------------*/
+const { validationResult } = require('express-validator');
 
+/*----------------------------------------functions-------------------------------------------------------*/
 
 module.exports = {
 

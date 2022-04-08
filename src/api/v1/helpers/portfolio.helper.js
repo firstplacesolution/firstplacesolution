@@ -12,7 +12,6 @@ const portfolioModel = require("../models/portfolio.models");
 
  function getPortfolioDetailsByInvestorId(investor_id) {
     const portfolioDetails =  portfolioModel.find({ investor_id });
-    // console.log("investore data" + portfolioDetails)
     return portfolioDetails ? portfolioDetails : [];
 }
 

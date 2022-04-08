@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
-// const { validateRegister  , validateLogin} = require("../validations/user.validation")
+const {validateTransaction} = require("../validations/transaction.validation")
 
 //----------task------------------------------------------------------------------
-// const taskController = require('../controllers/order/task.controller');
-// router.post('/task/create', validateTask('createTask'), taskController.createTask);
+const {getTransaction,updateTransaction} = require('../controllers/transaction.controller');
+router.get('/:id', validateTransaction('getAll'), getTransaction);
+router.post('/update', validateTransaction('update'), updateTransaction);
    
 
 module.exports = router;

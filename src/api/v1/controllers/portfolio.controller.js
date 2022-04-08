@@ -5,18 +5,12 @@ const walletModel = require("../models/wallet.model");
 const portfolioModel   = require("../models/portfolio.models")
 /*----------------------------------------helpers-------------------------------------------------------*/
 const { success, unknownError, serverValidation, badRequest } = require('../helpers/response.helper');
-const {getUserDetailsByToken} = require("../helpers/user.helper");
-const {getInvestorDetailsByUserId} = require("../helpers/investor.helper");
 const {getInvestorWalletByInvestorId} = require("../helpers/wallet.helper")
-const {getPortfolioDetailsByInvestorId,getAllPortfolioDetails} = require('../helpers/portfolio.helper');
-const { where } = require('../models/wallet.model');
-
+const {getPortfolioDetailsByInvestorId} = require('../helpers/portfolio.helper');
+const {investedData} = require('../helpers/transaction.helper')
 
 /*----------------------------------------functions-------------------------------------------------------*/
-const date = new Date()
-let month = date.getMonth()
-let year = 
-console.log(month)
+
 module.exports = {
 
     portfolio: async(req,res) =>{
@@ -41,7 +35,8 @@ module.exports = {
                         const portfoliData = new portfolioModel(data);
                         await portfoliData.save();
                         if (walletBalanceUpdate) {
-                            success(res, 'invested',{data:{amount,rate,lockin,base_wallet:newBaseWalletBalance,total_investment:invested_amount}});
+                            investedData(investor_id,amount)
+                            success(res, 'invested',{amount,rate,lockin,base_wallet:newBaseWalletBalance,total_investment:invested_amount});
                         } else {
                             badRequest(res, 'Invalid Details')
                         }
@@ -60,7 +55,7 @@ module.exports = {
                 serverValidation(res, { errorName: "serverValidation", errors: errors.array() })
             } else {
                     const data = await getPortfolioDetailsByInvestorId(req.params.investor_id)
-                    success(res, 'Portfolios',{data:data});
+                    success(res, 'Portfolios',data);
                 }        
         
         } catch (error) {
@@ -74,11 +69,10 @@ module.exports = {
                 serverValidation(res, { errorName: "serverValidation", errors: errors.array() })
             } else {
                     const data = await portfolioModel.findOneAndRemove({_id:req.params.portfolio_id})
-                    success(res, 'Portfolios deleted',{data:data});
+                    success(res, 'Portfolios deleted',data);
                 }        
         
         } catch (error) {
-            console.log(error)
             unknownError(res, error);
         }
     }

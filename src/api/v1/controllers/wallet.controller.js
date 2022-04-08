@@ -1,10 +1,12 @@
-const { success, unknownError, serverValidation, badRequest } = require('../helpers/response.helper');
-const { validationResult } = require('express-validator');
+//----------------------------------------models-----------------------------------------------
 const walletModel = require("../models/wallet.model");
+//----------------------------------------Helpers-----------------------------------------------
+const { success, unknownError, serverValidation, badRequest } = require('../helpers/response.helper');
 const { getInvestorWalletByInvestorId } = require("../helpers/wallet.helper");
-const {getPortfolioDetailsByInvestorId} = require('../helpers/portfolio.helper')
-const {getALLInvestorID} = require('../helpers/investor.helper')
-
+const {rechagedWalletData} = require('../helpers/transaction.helper')
+//--------------------------------------Validation----------------------------------------------
+const { validationResult } = require('express-validator');
+//----------------------------------------Functions---------------------------------------------
 
 module.exports = {
 
@@ -22,7 +24,6 @@ module.exports = {
                 }
             }
         } catch (error) {
-            console.log(error);
             unknownError(res, error);
         }
     },
@@ -41,6 +42,7 @@ module.exports = {
                     const newBaseWalletBalance = parseInt(investorWallet.base_wallet) + parseInt(amount);
                     const walletBalanceUpdate = await walletModel.findOneAndUpdate({ investor_id }, { base_wallet: newBaseWalletBalance });
                     if (walletBalanceUpdate) {
+                        rechagedWalletData(investor_id,amount);
                         success(res, 'Balance Updated Successfully');
                     } else {
                         badRequest(res, 'Invalid Details')
@@ -49,7 +51,6 @@ module.exports = {
 
             }
         } catch (error) {
-            console.log(error)
             unknownError(res, error);
         }
     },
