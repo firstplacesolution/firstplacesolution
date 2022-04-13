@@ -1,4 +1,5 @@
 const transactionModel =  require("../models/transaction.model");
+const { success} = require('../helpers/response.helper');
 
 async function rewardData(investor_id,amount) {
     let data={
@@ -11,7 +12,6 @@ async function rewardData(investor_id,amount) {
     try {
         let transactionDb = new transactionModel(data)
         transactionDb.save()
-        let result = true;
     } catch (error) {
         console.log("trancition db error "+ error);
     }
@@ -42,23 +42,23 @@ async function intrestData(investor_id,amount) {
     }
     try {
         let transactionDb = new transactionModel(data)
-        transactionDb.save()
-        let result = true;
+        await transactionDb.save()
     } catch (error) {
         console.log("transaction db error "+ error);
     }
 }
-async function withdrawlData(investor_id,amount) {
+async function withdrawalData(investor_id,amount,res) {
     let data={
         investor_id:investor_id,
         transaction_type:"debited",
         amount:amount,
         transaction_reason:"withdrawl",
+        transaction_status:"requested"
     }
     try {
         let transactionDb = new transactionModel(data)
-        transactionDb.save()
-        let result = true;
+        await transactionDb.save();
+        
     } catch (error) {
         console.log("transaction db error "+ error);
     }
@@ -73,8 +73,7 @@ async function investedData(investor_id,amount) {
     }
     try {
         let transactionDb = new transactionModel(data)
-        transactionDb.save()
-        let result = true;
+        await transactionDb.save()
     } catch (error) {
         console.log("transaction db error "+ error);
     }
@@ -88,7 +87,7 @@ module.exports = {
     rewardData,
     rechagedWalletData,
     intrestData,
-    withdrawlData,
+    withdrawalData,
     investedData,
     transactionDetailsByInvestorId
 }

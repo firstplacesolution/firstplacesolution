@@ -19,6 +19,12 @@ exports.validateWallet = (method) => {
                 body('investor_id', 'Investor Id is Required').not().isEmpty().trim().escape(),
             ]
         }
+        case 'withdrawal': {
+            return [
+                body('investor_id', 'Investor Id is Required').not().isEmpty().trim().escape(),
+                body('amount', 'amount is Required').not().isEmpty().trim().escape().isFloat({min:100,max:100000}),
+            ]
+        }
     }
 }
 

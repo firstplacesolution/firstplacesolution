@@ -18,17 +18,47 @@ async function investorID() {
     return list;
 }
 
+function dailyIntrest(portfolio) {
+    let date = new Date()
+    let month = date.getMonth()
+    let year = date.getFullYear()
+    amount = 0
+    switch (month) {
+        case 0:
+        case 2:
+        case 4:
+        case 6:
+        case 7:
+        case 9:
+        case 11:
+            amount += portfolio.amount*portfolio.rate/100/31
+            break;
+        case 1:
+            if (((year % 4 == 0) && (year % 100!= 0)) || (year %400 == 0)) {
+                amount += portfolio.amount*portfolio.rate/100/29
+            }else{amount += portfolio.amount*portfolio.rate/100/28}
+            break;
+        case 3:
+        case 5:
+        case 8:
+        case 10:
+            amount += portfolio.amount*portfolio.rate/100/30
+    }
+    return amount
+}
+
 async function updateReward(investerId) {
     let portfolioList = await getPortfolioDetailsByInvestorId(investerId);
     let money=await getInvestorWalletByInvestorId (investerId);
-    let amount = 0
+    let totalAmount = 0
     portfolioList.forEach(element => {
-        if (((year % 4 == 0) && (year % 100!= 0)) || (year %400 == 0)) {
-            amount += element.amount*element.rate/100/366
-        }else{amount += element.amount*element.rate/100/365}
+        let amount = dailyIntrest(element)
+        console.log(amount)
+        totalAmount += parseFloat(amount)
     });
-    intrestData(investerId,amount)
-    let daily_reward = parseFloat(amount)+parseFloat(money.reward_wallet);
+    console.log(totalAmount)
+    intrestData(investerId,totalAmount)
+    let daily_reward = parseFloat(totalAmount)+parseFloat(money.reward_wallet);
     const walletBalanceUpdate = await walletModel.findOneAndUpdate({"investor_id":investerId }, { "reward_wallet": daily_reward});
 }
 
