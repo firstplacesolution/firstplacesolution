@@ -10,7 +10,7 @@ const {
 const { getInvestorWalletByInvestorId } = require("../helpers/wallet.helper");
 const {
   rechagedWalletData,
-  withdrawlData,
+  withdrawalData,
 } = require("../helpers/transaction.helper");
 //--------------------------------------Validation----------------------------------------------
 const { validationResult } = require("express-validator");
@@ -95,18 +95,8 @@ module.exports = {
           let date = new Date();
           let dateCheck = date.getDate();
           if (dateCheck >= 5) {
-            const newBaseWalletBalance =
-              parseFloat(investorWallet.reward_wallet) - parseFloat(amount);
-            const walletBalanceUpdate = await walletModel.findOneAndUpdate(
-              { investor_id },
-              { reward_wallet: newBaseWalletBalance }
-            );
-            if (walletBalanceUpdate) {
-              withdrawlData(investor_id, amount);
-              success(res, "Withdrawl requested successfully");
-            } else {
-              badRequest(res, "Invalid Details");
-            }
+            withdrawalData(investor_id, amount);
+            success(res, "Withdrawl requested successfully");
           } else {
             badRequest(
               res,

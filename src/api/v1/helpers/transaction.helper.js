@@ -1,5 +1,4 @@
 const transactionModel =  require("../models/transaction.model");
-const { success} = require('../helpers/response.helper');
 
 async function rewardData(investor_id,amount) {
     let data={
