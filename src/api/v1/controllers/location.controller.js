@@ -1,4 +1,4 @@
-const { success, unknownError, serverValidation, badRequest } = require('../helpers/response.helper');
+const { success, unknownError, serverValidation, badRequest } = require('../helpers/response_helper');
 const { validationResult } = require('express-validator');
 const statesModel = require("../models/states.model");
 const citiesModel = require("../models/city.model");
