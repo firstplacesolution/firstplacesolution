@@ -1,7 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const {rewardDistribution} =require('./helpers/reward.helper');
 
 require("../v1/config/mongodb")
+
+//Cron job
+nodeCron.schedule("1 * * * * *",rewardDistribution);
+
 
 const otpRoute = require('./routes/otp.route')
 const userRoute = require('../v1/routes/user.route');
