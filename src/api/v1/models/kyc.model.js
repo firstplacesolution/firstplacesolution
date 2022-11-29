@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const KYCSchema = new Schema({
     investor_id: { type: String, required: [true, 'Inverstor ID is Required'], index: true, unique: true },
-    dob: { type: String, required: [true, 'Date of Birth is Required'], index: true, unique: true },
+    dob: { type: String, required: [true, 'Date of Birth is Required'], index: true},
     gender: { type: String, enum: ['Male', 'Female', 'Other'], required: [true, 'Gender is Required'] },
     occupation: { type: String, required: [true, 'Occupation is Required'] },
     annual_income: { type: Number, required: [true, 'Annual Income is Required'] },
