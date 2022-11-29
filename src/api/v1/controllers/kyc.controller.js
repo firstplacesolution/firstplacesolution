@@ -1,4 +1,4 @@
-const { success, unknownError, serverValidation, badRequest } = require('../helpers/response.helper');
+const { success, unknownError, serverValidation, badRequest } = require('../helpers/response_helper');
 const { validationResult } = require('express-validator');
 const kycModel = require("../models/kyc.model");
 const { checkInvestorByInvestorId } = require("../helpers/investor.helper");

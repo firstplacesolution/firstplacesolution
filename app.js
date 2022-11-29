@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const app = express();
 
 //----------import files--------------------------------------
-const {success, badRequest }  =  require('./src/api/v1/helpers/response.helper')
+const {success, badRequest }  =  require('./src/api/v1/helpers/response_helper')
 const version1Index = require("./src/api/v1/index");
 
 
